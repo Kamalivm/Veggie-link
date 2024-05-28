@@ -29,49 +29,57 @@ const Data = {
             id: 1,
             img: apple,
             title: 'Apple',
-            price: 150
+            price: 150,
+            description: 'A sweet, crisp fruit perfect for snacking or adding to salads.'
         },
         {
             id: 2,
             img: strawberry,
             title: 'Strawberry',
-            price: 90
+            price: 90,
+            description: 'Juicy and delicious, strawberries are a great source of vitamins.'
         },
         {
             id: 3,
             img: melon,
             title: 'Melon',
-            price: 30
+            price: 30,
+            description: 'Refreshing and hydrating, melons are ideal for hot summer days.'
         },
         {
             id: 4,
             img: mango,
             title: 'Mango',
-            price: 25
+            price: 25,
+            description: 'Known as the king of fruits, mangoes are sweet and rich in flavor.'
         },
         {
             id: 5,
             img: kiwi,
             title: 'Kiwi',
-            price: 95
+            price: 95,
+            description: 'Tart and sweet, kiwis are packed with vitamin C and antioxidants.'
         },
         {
             id: 6,
             img: grapes,
             title: 'Grapes',
-            price: 40
+            price: 40,
+            description: 'Perfect for snacking, grapes are sweet, juicy, and high in nutrients.'
         },
         {
             id: 7,
             img: orange,
             title: 'Orange',
-            price: 60
+            price: 60,
+            description: 'Citrusy and refreshing, oranges are great for boosting your immune system.'
         },
         {
             id: 8,
             img: amla,
             title: 'Amla',
-            price: 20
+            price: 20,
+            description: 'Also known as Indian gooseberry, amla is rich in vitamin C and antioxidants.'
         }
     ],
     vegetableItems: [
@@ -79,92 +87,108 @@ const Data = {
             id: 9,
             img: pumpkin,
             title: 'Pumpkin',
-            price: 20
+            price: 20,
+            description: 'A versatile vegetable used in soups, pies, and savory dishes.'
         },
         {
             id: 10,
             img: carrot,
             title: 'Carrot',
-            price: 30
+            price: 30,
+            description: 'Crunchy and sweet, carrots are great raw or cooked in various dishes.'
         },
         {
             id: 11,
             img: onion,
             title: 'Onion',
-            price: 50
+            price: 50,
+            description: 'A staple ingredient in many dishes, onions add flavor and depth.'
         },
         {
             id: 12,
             img: cabbage,
             title: 'Cabbage',
-            price: 15
+            price: 15,
+            description: 'A leafy green vegetable often used in salads and cooked dishes.'
         },
         {
             id: 13,
             img: potato,
             title: 'Potato',
-            price: 35
+            price: 35,
+            description: 'A versatile root vegetable that can be baked, mashed, or fried.'
         },
         {
             id: 14,
             img: tomato,
             title: 'Tomato',
-            price: 50
+            price: 50,
+            description: 'Juicy and tangy, tomatoes are essential in salads, sauces, and more.'
         },
         {
             id: 15,
             img: corn,
             title: 'Corn',
-            price: 30
+            price: 30,
+            description: 'Sweet and crunchy, corn is perfect for grilling or adding to salads.'
         },
         {
             id: 16,
             img: brinjal,
             title: 'Brinjal',
-            price: 12
+            price: 12,
+            description: 'Also known as eggplant, brinjal is great in stews, curries, and grilled dishes.'
         },
         {
             id: 17,
             img: bittergourd,
-            title: 'Bitter Groud',
-            price: 10
+            title: 'Bitter Gourd',
+            price: 10,
+            description: 'A unique vegetable known for its bitter taste and health benefits.'
         },
         {
             id: 18,
             img: ladiesfinger,
             title: 'Ladies Finger',
-            price: 10
+            price: 10,
+            description: 'Also known as okra, it is popular in soups, stews, and fried dishes.'
         },
     ],
     spinachItems:[
-       { id: 19,
+       { 
+        id: 19,
         img: bloomsdale,
-        title : 'bloomsdale',
-        price : 15,
+        title: 'Bloomsdale',
+        price: 15,
+        description: 'A variety of spinach known for its dark green, crinkled leaves.'
        },
        {
         id: 20,
         img: escalade,
-        title : 'escalade',
-        price : 15,
+        title: 'Escalade',
+        price: 15,
+        description: 'A hybrid spinach variety with smooth, dark green leaves.'
        },
        {
         id: 21,
         img: planthub,
-        title : 'planthub',
-        price : 15,
+        title: 'Planthub',
+        price: 15,
+        description: 'A nutritious spinach variety with tender, succulent leaves.'
        },
        {
         id: 22,
         img: regiment,
-        title : 'regiment',
-        price : 25,
+        title: 'Regiment',
+        price: 25,
+        description: 'A high-yield spinach variety with dark green, smooth leaves.'
        },
        {
         id: 23,
         img: aywal,
-        title : 'aywal',
-        price : 25,
+        title: 'Aywal',
+        price: 25,
+        description: 'A spinach variety known for its high nutritional content and robust flavor.'
        },
     ],
 };
