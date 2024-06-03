@@ -88,3 +88,80 @@
 .product:hover {
   transform: scale(1.05);
 }
+
+.slideshow-container {
+  position: relative;
+}
+
+.slick-slide img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.slick-dots {
+  bottom: 20px;
+}
+
+.slick-dots li button:before {
+  font-size: 12px;
+  color: white;
+}
+
+.slick-dots li.slick-active button:before {
+  color: green;
+}
+
+.slideshow-container .slick-list {
+  height: 100vh;
+}
+
+.slideshow-container .slick-slide {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slideshow-container .slick-slide .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.slideshow-container .slick-slide .overlay h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: fadeInUp 1s ease-out;
+}
+
+.slideshow-container .slick-slide .overlay p {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  animation: fadeInUp 1.5s ease-out;
+}
+
+.slideshow-container .slick-slide .overlay .price {
+  font-size: 2rem;
+  font-weight: bold;
+  animation: fadeInUp 2s ease-out;
+}
+
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}

@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { CiSearch } from 'react-icons/ci';
-import { IoHeart } from 'react-icons/io5';
-import { NavLink,Link } from 'react-router-dom';
+import { IoHeart, IoHeartOutline } from 'react-icons/io5';
+import { NavLink, Link } from 'react-router-dom';
 import { CiShoppingCart, CiDeliveryTruck } from 'react-icons/ci';
 import Slider from "react-slick";
 import Data from './Data.jsx';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { CartContext } from './CartContext.jsx';
 
 const Main = () => {
     const Products = {
@@ -16,7 +17,11 @@ const Main = () => {
     };
 
     const [filteredProducts, setFilteredProducts] = useState(Products);
-    const [recentlyViewed, setRecentlyViewed] = useState([]);
+    const { favoriteItems, addToFavorites, removeFromFavorites } = useContext(CartContext);
+
+    const isFavorite = (item) => {
+        return favoriteItems && favoriteItems.some(favItem => favItem.id === item.id);
+    };
 
     const filterByCategory = (category) => {
         if (category === 'All') {
@@ -46,18 +51,6 @@ const Main = () => {
             ),
         };
         setFilteredProducts(filteredArray);
-    };
-
-
-    const handleViewProduct = (item) => {
-        setRecentlyViewed(prevState => {
-            const itemExists = prevState.some(viewedItem => viewedItem.id === item.id);
-            if (itemExists) {
-                return prevState;
-            } else {
-                return [...prevState, item];
-            }
-        });
     };
 
     const settings = {
@@ -103,7 +96,7 @@ const Main = () => {
                             </NavLink>
                             <NavLink to='/orders' className="flex items-center justify-center bg-gray-700 text-white px-5 py-2 rounded-full hover:bg-gray-600 transition duration-300 ease-in-out transform hover:scale-105">
                                 <CiDeliveryTruck className="mr-2" size={'1.5rem'} />
-                                <span className="text-white">OrderItems</span>
+                                <span className="text-white">OrderedItems</span>
                             </NavLink>
                         </div>
                     <div className="search flex items-center px-5 py-2 rounded bg-gray-700">
@@ -122,7 +115,9 @@ const Main = () => {
                     <button 
                         className='bg-green-600 text-white px-5 py-2 rounded-full hover:bg-green-700 transition'
                         onClick={() => filterByCategory('All')}
-                    >All                    </button>
+                    >
+                        All
+                    </button>
                     <button 
                         className='bg-gray-700 text-white px-5 py-2 rounded-full hover:bg-gray-600 transition'
                         onClick={() => filterByCategory('fruitItems')}
@@ -144,28 +139,6 @@ const Main = () => {
                 </div>
             </div>
             
-            {recentlyViewed.length > 0 && (
-                <div className="recently-viewed p-4 bg-gray-800">
-                    <h2 className="text-2xl font-bold mb-4 text-green-400">Recently Viewed</h2>
-                    <Slider {...settings}>
-                        {recentlyViewed.map(item => (
-                            <div key={item.id} className="p-2">
-                                <Link to={`/details/${item.id}`} className="product flex flex-col bg-gray-700 p-4 rounded-lg shadow-lg transition transform hover:scale-105 cursor-pointer">
-                                    <img src={item.img} alt={item.title} className='w-full h-32 object-cover rounded' />
-                                    <div className='flex flex-col justify-between flex-grow mt-4'>
-                                        <h1 className='text-lg font-semibold text-green-400'>{item.title}</h1>
-                                        <p className='text-sm text-gray-300'>{item.description}</p>
-                                        <div className='flex justify-between items-center mt-4'>
-                                            <p className='text-xl font-bold text-white'>Rs. {item.price}.00</p>
-                                        </div>
-                                    </div>
-                                </Link>
-                            </div>
-                        ))}
-                    </Slider>
-                </div>
-            )}
-            
             <div className="products grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-4">
                 {filteredProducts && Object.keys(filteredProducts).map((category) => (
                     filteredProducts[category].map((item) => (
@@ -173,7 +146,6 @@ const Main = () => {
                             to={`/details/${item.id}`} 
                             key={item.id} 
                             className="product flex flex-col justify-between bg-gray-800 p-4 rounded-lg shadow-lg transition transform hover:scale-105 cursor-pointer"
-                            onClick={() => handleViewProduct(item)}
                         >
                             <img src={item.img} alt={item.title} className='w-full h-48 object-cover rounded' />
                             <div className='flex flex-col justify-between flex-grow mt-4'>
@@ -181,7 +153,22 @@ const Main = () => {
                                 <p className='text-sm text-gray-300'>{item.description}</p>
                                 <div className='flex justify-between items-center mt-4'>
                                     <p className='text-xl font-bold text-white'>Rs. {item.price}.00</p>
-                                    <button><IoHeart className="text-red-500" size="1.5em" /></button>
+                                    <button 
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            if (isFavorite(item)) {
+                                                removeFromFavorites(item.id);
+                                            } else {
+                                                addToFavorites(item);
+                                            }
+                                        }}
+                                    >
+                                        {isFavorite(item) ? (
+                                            <IoHeart className="text-red-500" size="1.5em" />
+                                        ) : (
+                                            <IoHeartOutline className="text-white" size="1.5em" />
+                                        )}
+                                    </button>
                                 </div>
                             </div>
                         </Link>
@@ -193,5 +180,3 @@ const Main = () => {
 }
 
 export default Main;
-
-                   

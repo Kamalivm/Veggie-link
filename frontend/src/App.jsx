@@ -1,6 +1,6 @@
 import {Home} from './Pages/Home'
 import Cart from './Pages/Cart'
-import {Favourite} from './Pages/Favourite'
+import Favourite from './Pages/Favourite'
 import {Order} from './Pages/Order'
 import Payment from './Pages/PaymentPage'
 import ProductDetails from './Pages/ProductDetails'
