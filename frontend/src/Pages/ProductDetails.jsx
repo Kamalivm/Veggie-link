@@ -4,99 +4,22 @@ import { Link, NavLink, useParams } from 'react-router-dom';
 import { IoCheckmarkCircle } from 'react-icons/io5';
 import { CiShoppingCart, CiDeliveryTruck } from 'react-icons/ci';
 import Data from '../Components/Data';
-import { CiSearch } from 'react-icons/ci';
 import { IoHeart } from 'react-icons/io5';
 import RatingStars from '../Components/RatingStars';
 
 const ProductDetails = () => {
-    const Products = {
-        fruitItems: Data.fruitItems,
-        vegetableItems: Data.vegetableItems,
-        spinachItems: Data.spinachItems
-    };
-
-    const [filteredProducts, setFilteredProducts] = useState(Products);
-    const [recentlyViewed, setRecentlyViewed] = useState([]);
-
-    const filterByCategory = (category) => {
-        if (category === 'All') {
-            setFilteredProducts(Products);
-        } else if (Object.prototype.hasOwnProperty.call(Products, category)) {
-            setFilteredProducts({
-                fruitItems: category === 'fruitItems' ? Products.fruitItems : [],
-                vegetableItems: category === 'vegetableItems' ? Products.vegetableItems : [],
-                spinachItems: category === 'spinachItems' ? Products.spinachItems : [],
-            });
-        } else {
-            console.error(`Category '${category}' does not exist.`);
-        }
-    };
-
-    const searchHandler = (e) => {
-        const searchQuery = e.target.value.toLowerCase();
-        const filteredArray = {
-            fruitItems: Data.fruitItems.filter((item) =>
-                item.title.toLowerCase().includes(searchQuery)
-            ),
-            vegetableItems: Data.vegetableItems.filter((item) =>
-                item.title.toLowerCase().includes(searchQuery)
-            ),
-            spinachItems: Data.spinachItems.filter((item) =>
-                item.title.toLowerCase().includes(searchQuery)
-            ),
-        };
-        setFilteredProducts(filteredArray);
-    };
-
-
-    const handleViewProduct = (item) => {
-        setRecentlyViewed(prevState => {
-            const itemExists = prevState.some(viewedItem => viewedItem.id === item.id);
-            if (itemExists) {
-                return prevState;
-            } else {
-                return [...prevState, item];
-            }
-        });
-    };
-
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    initialSlide: 1
-                }
-            }
-        ]
-    };
 
     const { id } = useParams();
     const { addToCart } = useContext(CartContext);
     const [notification, setNotification] = useState(false);
     const [userReview, setUserReview] = useState({ comment: '', rating: '' });
-    const [emptyFieldError, setEmptyFieldError] = useState(false); // State to track empty field error
+    const [emptyFieldError, setEmptyFieldError] = useState(false); 
 
     const allProducts = [
         ...Data.fruitItems,
         ...Data.vegetableItems,
-        ...Data.spinachItems
+        ...Data.spinachItems,
+        ...Data.seedItems,
     ];
 
     const product = allProducts.find(item => item.id === parseInt(id));
@@ -120,14 +43,11 @@ const ProductDetails = () => {
     const handleReviewSubmit = (e) => {
         e.preventDefault();
         
-        // Check if comment and rating fields are empty
         if (!userReview.comment.trim() || !userReview.rating) {
-            // If any field is empty, set empty field error to true and return
             setEmptyFieldError(true);
             return;
         }
         
-        // If both fields are not empty, proceed with submitting the review and reset empty field error
         product.reviews.push({ user: "User", comment: userReview.comment, rating: userReview.rating });
         setUserReview({ comment: '', rating: '' });
         setEmptyFieldError(false);
@@ -138,15 +58,15 @@ const ProductDetails = () => {
             <div className='header bg-gray-800 text-white py-4 px-8 flex justify-between items-center'>
                 <h1 className='text-3xl font-bold'>VeggieLink</h1>
                 <div className='flex space-x-4'>
-                    <NavLink to='/cart' className='nav-link flex items-center'>
+                    <NavLink to='/cart' className='flex items-center justify-center bg-gray-700 text-white px-5 py-2 rounded-full hover:bg-gray-600 transition duration-300 ease-in-out transform hover:scale-105'>
                         <CiShoppingCart className='nav-icon mr-1' size={24} />
                         <span>Cart</span>
                     </NavLink>
-                    <NavLink to='/favs' className='nav-link flex items-center'>
+                    <NavLink to='/favs' className='flex items-center justify-center bg-gray-700 text-white px-5 py-2 rounded-full hover:bg-gray-600 transition duration-300 ease-in-out transform hover:scale-105'>
                         <IoHeart className='nav-icon text-red-500 mr-1' size={24} />
                         <span>Favorites</span>
                     </NavLink>
-                    <NavLink to='/orders' className='nav-link flex items-center'>
+                    <NavLink to='/orders' className='flex items-center justify-center bg-gray-700 text-white px-5 py-2 rounded-full hover:bg-gray-600 transition duration-300 ease-in-out transform hover:scale-105'>
                         <CiDeliveryTruck className='nav-icon mr-1' size={24} />
                         <span>Orders</span>
                     </NavLink>

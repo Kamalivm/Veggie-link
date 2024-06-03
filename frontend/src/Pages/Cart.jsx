@@ -2,20 +2,10 @@ import React, { useState, useContext } from 'react';
 import { CartContext } from '../Components/CartContext';
 import { Link, NavLink } from 'react-router-dom';
 import { CiShoppingCart, CiDeliveryTruck } from 'react-icons/ci';
-import Data from '../Components/Data';
-import { CiSearch } from 'react-icons/ci';
 import { IoHeart } from 'react-icons/io5';
 
 const Cart = () => {
     const { cartItems, removeFromCart, incrementQuantity, decrementQuantity } = useContext(CartContext);
-
-    if (!cartItems || cartItems.length === 0) {
-        return (
-            <div className='flex items-center justify-center min-h-screen bg-gray-900 text-gray-200 text-2xl'>
-                <h1>No items in the cart</h1>
-            </div>
-        );
-    }
 
     const totalAmount = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
 
@@ -65,6 +55,12 @@ const Cart = () => {
                                     </div>
                                     <span className='font-semibold'>Rs. {item.price * item.quantity}.00</span>
                                 </div>
+                                <button
+                                    className='bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-md font-semibold mt-2'
+                                    onClick={() => removeFromCart(item.id)}
+                                >
+                                    Remove
+                                </button>
                             </div>
                         </div>
                     ))}
@@ -72,9 +68,9 @@ const Cart = () => {
                 <div className='mt-8 text-right'>
                     <h2 className='text-xl font-semibold'>Total: Rs. {totalAmount}.00</h2>
                     <button className='bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-md font-semibold mt-4'>
-                    <NavLink to="/payment" className='bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-md font-semibold mt-4'>
-                        Checkout
-                    </NavLink>
+                        <NavLink to="/payment" className='bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-md font-semibold mt-4'>
+                            Checkout
+                        </NavLink>
                     </button>
                 </div>
                 <div className='mt-8 text-center'>

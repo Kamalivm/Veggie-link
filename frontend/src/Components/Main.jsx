@@ -1,23 +1,29 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { CiSearch } from 'react-icons/ci';
 import { IoHeart, IoHeartOutline } from 'react-icons/io5';
 import { NavLink, Link } from 'react-router-dom';
 import { CiShoppingCart, CiDeliveryTruck } from 'react-icons/ci';
-import Slider from "react-slick";
 import Data from './Data.jsx';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { CartContext } from './CartContext.jsx';
 
 const Main = () => {
     const Products = {
         fruitItems: Data.fruitItems,
         vegetableItems: Data.vegetableItems,
-        spinachItems: Data.spinachItems
+        spinachItems: Data.spinachItems,
+        seedItems: Data.seedItems,
     };
 
     const [filteredProducts, setFilteredProducts] = useState(Products);
+    const [loading, setLoading] = useState(true);
     const { favoriteItems, addToFavorites, removeFromFavorites } = useContext(CartContext);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 2000);
+        return () => clearTimeout(timer);
+    }, []);
 
     const isFavorite = (item) => {
         return favoriteItems && favoriteItems.some(favItem => favItem.id === item.id);
@@ -31,6 +37,7 @@ const Main = () => {
                 fruitItems: category === 'fruitItems' ? Products.fruitItems : [],
                 vegetableItems: category === 'vegetableItems' ? Products.vegetableItems : [],
                 spinachItems: category === 'spinachItems' ? Products.spinachItems : [],
+                seedItems: category === 'seedItems' ? Products.seedItems : [],
             });
         } else {
             console.error(`Category '${category}' does not exist.`);
@@ -49,35 +56,11 @@ const Main = () => {
             spinachItems: Data.spinachItems.filter((item) =>
                 item.title.toLowerCase().includes(searchQuery)
             ),
+            seedItems: Data.seedItems.filter((item) =>
+                item.title.toLowerCase().includes(searchQuery)
+            ),
         };
         setFilteredProducts(filteredArray);
-    };
-
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    initialSlide: 1
-                }
-            }
-        ]
     };
 
     return (
@@ -88,15 +71,15 @@ const Main = () => {
                         <div className="flex items-center space-x-4">
                             <NavLink to='/cart' className="flex items-center justify-center bg-gray-700 text-white px-5 py-2 rounded-full hover:bg-gray-600 transition duration-300 ease-in-out transform hover:scale-105">
                                 <CiShoppingCart className="mr-2" size={'1.5rem'} />
-                                <span className="text-white">CartItems</span>
+                                <span className="text-white">Cart</span>
                             </NavLink>
                             <NavLink to='/favs' className="flex items-center justify-center bg-gray-700 text-white px-5 py-2 rounded-full hover:bg-gray-600 transition duration-300 ease-in-out transform hover:scale-105">
                                 <IoHeart className="mr-2 text-red-500" size={'1.5rem'} />
-                                <span className="text-white">FavouriteItems</span>
+                                <span className="text-white">Favourits</span>
                             </NavLink>
                             <NavLink to='/orders' className="flex items-center justify-center bg-gray-700 text-white px-5 py-2 rounded-full hover:bg-gray-600 transition duration-300 ease-in-out transform hover:scale-105">
                                 <CiDeliveryTruck className="mr-2" size={'1.5rem'} />
-                                <span className="text-white">OrderedItems</span>
+                                <span className="text-white">Orders</span>
                             </NavLink>
                         </div>
                     <div className="search flex items-center px-5 py-2 rounded bg-gray-700">
@@ -136,17 +119,28 @@ const Main = () => {
                     >
                         Spinaches
                     </button>
+                    <button 
+                        className='bg-gray-700 text-white px-5 py-2 rounded-full hover:bg-gray-600 transition'
+                        onClick={() => filterByCategory('seedItems')}
+                    >
+                        Seeds
+                    </button>
                 </div>
             </div>
             
+            {loading ? (
+                <div className="loading-overlay flex justify-center items-center h-screen w-full absolute top-0 left-0 bg-gray-900 bg-opacity-75 z-20">
+                    <h2 className="text-white text-2xl">Loading...</h2>
+                </div>
+            ) : null}
+
             <div className="products grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-4">
                 {filteredProducts && Object.keys(filteredProducts).map((category) => (
                     filteredProducts[category].map((item) => (
                         <Link 
                             to={`/details/${item.id}`} 
                             key={item.id} 
-                            className="product flex flex-col justify-between bg-gray-800 p-4 rounded-lg shadow-lg transition transform hover:scale-105 cursor-pointer"
-                        >
+                            className="product flex flex-col justify-between bg-gray-800 p-4 rounded-lg shadow-lg transition transform hover:scale-105 cursor-pointer" >
                             <img src={item.img} alt={item.title} className='w-full h-48 object-cover rounded' />
                             <div className='flex flex-col justify-between flex-grow mt-4'>
                                 <h1 className='text-lg font-semibold text-green-400'>{item.title}</h1>

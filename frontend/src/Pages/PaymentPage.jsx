@@ -12,7 +12,6 @@ const PaymentPage = () => {
 
   const handlePayment = () => {
     console.log('Processing payment...');
-    // Perform payment processing logic here
     setPaymentSuccessful(true);
   };
 

@@ -22,6 +22,11 @@ import escalade from '../assets/escalade.jpg'
 import planthub from '../assets/planthub.jpg'
 import regiment from '../assets/regiment.jpg'
 import aywal from '../assets/aywal.webp'
+import flaxseed from '../assets/flaxseed.jpg'
+import pumpkinseed from '../assets/pumpkinseed.jpg'
+import sesameseed from '../assets/sesameseed.jpg'
+import sunflowerseed from '../assets/sunflowerseed.jpg'
+import watermelonseed from '../assets/watermelonseed.jpg'
 
 const Data = {
     fruitItems: [
@@ -214,6 +219,49 @@ const Data = {
             rating: 4.4
         },
     ],
+    seedItems:[
+        { 
+            id: 24,
+            img: flaxseed,
+            title: 'Flax Seed',
+            price: 20,
+            description: 'Rich in omega-3 fatty acids, fiber, and essential nutrients, flax seeds promote heart health, aid digestion, and improve skin health.',
+            rating: 4.3
+        },
+        {
+            id: 25,
+            img: pumpkinseed,
+            title: 'Pumpkin Seed',
+            price: 30,
+            description: 'Known as pepitas, pumpkin seeds are a protein-rich snack packed with fiber, vitamins, and minerals, ideal for both sweet and savory dishes.',
+            rating: 4.0
+        },
+        {
+            id: 26,
+            img: sesameseed,
+            title: 'Sesame Seed',
+            price: 10,
+            description: 'Sesame seeds, with their nutty flavor and crunchy texture, are nutrient powerhouses rich in healthy fats, protein, and essential vitamins and minerals.',
+            rating: 4.3
+        },
+        {
+            id: 27,
+            img: sunflowerseed,
+            title: 'Sunflower Seed',
+            price: 35,
+            description: 'Enjoyed as a snack or added to salads and baked goods, sunflower seeds are nutrient-dense, providing healthy fats, protein, fiber, and essential nutrients.',
+            rating: 4.5
+        },
+        {
+            id: 28,
+            img: watermelonseed,
+            title: 'Watermelon Seed',
+            price: 25,
+            description: 'Packed with protein, healthy fats, vitamins, and minerals, watermelon seeds are often roasted and seasoned for a delicious snack or used in salads and trail mixes.',
+            rating: 4.4
+        },
+    ],
+    
 };
 
 export default Data;
