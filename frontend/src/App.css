@@ -165,3 +165,26 @@
       transform: translateY(0);
   }
 }
+.hero-section {
+  background-size: cover;
+  background-position: center;
+}
+
+.parallax-section {
+  background-attachment: fixed;
+}
+
+.feature-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  border: 3px solid #4CAF50;
+}
+
+.product {
+  transition: transform 0.3s;
+}
+
+.product:hover {
+  transform: scale(1.05);
+}

@@ -4,7 +4,7 @@ import Favourite from './Pages/Favourite'
 import {Order} from './Pages/Order'
 import Payment from './Pages/PaymentPage'
 import ProductDetails from './Pages/ProductDetails'
-
+import Signup from './Pages/Signup'
 import{
   createBrowserRouter,
   RouterProvider,
@@ -16,7 +16,8 @@ function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path = '/' element = {<Root/>}>
-        <Route index element = {<Home/>}/>
+        <Route index element = {<Signup/>}/>
+        <Route path='/home' element = {<Home/>}/>
         <Route path='/cart' element = {<Cart/>}/>
         <Route path='/favs' element = {<Favourite/>}/>
         <Route path='/orders' element = {<Order/>}/>
