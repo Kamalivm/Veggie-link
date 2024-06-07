@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
-import { CiSearch, CiShoppingCart, CiDeliveryTruck } from 'react-icons/ci';
+import { CiSearch, CiShoppingCart, CiDeliveryTruck} from 'react-icons/ci';
 import { IoHeart, IoHeartOutline } from 'react-icons/io5';
 import { NavLink, Link } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
@@ -10,6 +10,7 @@ import quote1 from '../assets/quote1.jpg';
 import quote2 from '../assets/quote2.jpg';
 import quote3 from '../assets/quote3.avif';
 import { FaUser } from 'react-icons/fa';
+import { FiPlusCircle } from 'react-icons/fi';
 
 const Main = () => {
     const Products = {
@@ -87,6 +88,13 @@ const Main = () => {
                                 <CiDeliveryTruck className="mr-2" size={'1.5rem'} />
                                 <span className="text-white">Orders</span>
                             </NavLink>
+                            <NavLink
+                            to='/additemform'
+                            className="flex items-center justify-center bg-gray-700 text-white px-5 py-2 rounded-full hover:bg-gray-500 transition duration-300 ease-in-out transform hover:scale-105"
+                        >
+                            <FiPlusCircle className="mr-2" size={'1.5rem'} />
+                            <span className="text-white">Post</span>
+                        </NavLink>
                         </div>
                     </div>
 
@@ -109,7 +117,7 @@ const Main = () => {
                     </div>
                 </div>
             </div>
-
+            
             <div className='carousel-section bg-gray-800 h-screen relative'>
                 <Carousel 
                     showArrows={false} 

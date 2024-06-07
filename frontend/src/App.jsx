@@ -5,6 +5,9 @@ import {Order} from './Pages/Order'
 import Payment from './Pages/PaymentPage'
 import ProductDetails from './Pages/ProductDetails'
 import Signup from './Pages/Signup'
+import AddItemForm from './Pages/AddItemForm'
+
+
 import{
   createBrowserRouter,
   RouterProvider,
@@ -23,6 +26,7 @@ function App() {
         <Route path='/orders' element = {<Order/>}/>
         <Route path='/payment' element = {<Payment/>}/>
         <Route path='/details/:id' element={<ProductDetails/>}/>
+        <Route path='/additemform' element = {<AddItemForm/>}/>
       </Route>
     )
   )

@@ -59,7 +59,7 @@ const Favorite = () => {
                 )}
             </div>
             <footer className="mt-8 text-center">
-                <Link to="/" className="text-green-500 hover:underline">
+                <Link to="/home" className="text-green-500 hover:underline">
                     Continue Shopping
                 </Link>
             </footer>
