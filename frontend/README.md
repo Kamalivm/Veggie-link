@@ -36,14 +36,7 @@ cd VeggieLink
 
 Install dependencies:  
 
-npm install  
-Set up environment variables:  
-
-Create a .env file in the root directory and add the following variables:  
-
-PORT=5000  
-MONGODB_URI=your_mongodb_uri  
-JWT_SECRET=your_jwt_secret 
+npm install   
 
 Start the server:  
 
