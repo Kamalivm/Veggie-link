@@ -1,13 +1,13 @@
-VeggieLink
+**VeggieLink**
 VeggieLink is an e-commerce platform for buying fresh fruits and vegetables online.
 
-Features
+**Features**
 Browse through a variety of fruits and vegetables.
 Add items to cart and proceed to checkout.
 Add items to favorites for quick access.
 View order history.
 Rate and review products.
-Technologies Used
+**Technologies Used**
 React: Frontend library for building user interfaces.
 React Router: For routing within the application.
 Tailwind CSS: Utility-first CSS framework for styling.
@@ -17,11 +17,11 @@ Express: Web application framework for Node.js for building the server-side logi
 MongoDB: NoSQL database for storing product details, user data, and orders.
 jsonwebtoken: For user authentication and authorization.
 bcrypt: For hashing user passwords.
-Getting Started
+**Getting Started**
 Prerequisites
 Node.js installed on your machine
 MongoDB Atlas account (or local MongoDB server)
-Installation
+**Installation**
 Clone the repository:
 
 bash
