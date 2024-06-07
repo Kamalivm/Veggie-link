@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { NavLink,Link } from 'react-router-dom'; // Import NavLink
+import { NavLink, Link } from 'react-router-dom'; // Import NavLink
 import { CartContext } from '../Components/CartContext.jsx';
 import { CiShoppingCart, CiDeliveryTruck } from 'react-icons/ci';
 import { IoHeart } from 'react-icons/io5';
@@ -12,7 +12,9 @@ const AddItemForm = () => {
         description: '',
         price: '',
         img: '',
-        category: 'fruitItems' // default category
+        imgName: '', // Add imgName to state
+        category: 'fruitItems', // default category
+        quantity: '' // Add quantity to state
     });
 
     const handleChange = (e) => {
@@ -30,19 +32,16 @@ const AddItemForm = () => {
 
     const handleImageUpload = (e) => {
         const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onload = () => {
-            setItem((prevItem) => ({
-                ...prevItem,
-                img: reader.result // Set image data URL
-            }));
-        };
-        reader.readAsDataURL(file); // Read the file as data URL
+        setItem((prevItem) => ({
+            ...prevItem,
+            img: URL.createObjectURL(file), // Set the image URL for display if needed
+            imgName: file.name // Set the image file name
+        }));
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!item.title || !item.description || !item.price || !item.img) {
+        if (!item.title || !item.description || !item.price || !item.img || !item.quantity) {
             alert('Please fill out all fields');
             return;
         }
@@ -51,7 +50,9 @@ const AddItemForm = () => {
             title: item.title,
             description: item.description,
             price: parseFloat(item.price),
-            img: item.img
+            img: item.img,
+            imgName: item.imgName,
+            quantity: parseInt(item.quantity) // Add quantity to new item
         };
         addItem(newItem, item.category);
         setItem({
@@ -59,13 +60,15 @@ const AddItemForm = () => {
             description: '',
             price: '',
             img: '',
-            category: 'fruitItems'
+            imgName: '',
+            category: 'fruitItems',
+            quantity: ''
         });
     };
 
     return (
         <div className="bg-gray-900 text-gray-200 min-h-screen">
-            <header className="bg-gray-800 text-white py-4 px-8 flex justify-between items-center">
+            <header className="bg-gray-800 text-white py-4 px-8 flex justify-between items-center fixed w-full z-10">
                 <h1 className="text-3xl font-bold">VeggieLink</h1>
                 <div className="flex space-x-4">
                     <NavLink to="/cart" className="flex items-center justify-center bg-gray-700 text-white px-5 py-2 rounded-full hover:bg-gray-600 transition duration-300 ease-in-out transform hover:scale-105">
@@ -82,8 +85,8 @@ const AddItemForm = () => {
                     </NavLink>
                 </div>
             </header>
-            <div className="min-h-screen flex items-center justify-center bg-gray-900">
-                <form onSubmit={handleSubmit} className="p-6 bg-gray-800 rounded-lg shadow-md max-w-md w-full">
+            <div className="flex items-center justify-center bg-gray-900 pt-20 pb-16"> {/* Adjusted top padding */}
+                <form onSubmit={handleSubmit} className="p-6 bg-gray-800 rounded-lg shadow-md max-w-md w-full mt-4">
                     <div className="mb-4">
                         <label className="block text-white mb-2" htmlFor="title">Title</label>
                         <input
@@ -121,10 +124,22 @@ const AddItemForm = () => {
                         />
                     </div>
                     <div className="mb-4">
+                        <label className="block text-white mb-2" htmlFor="quantity">Quantity</label>
+                        <input
+                            type="number"
+                            id="quantity"
+                            name="quantity"
+                            value={item.quantity}
+                            onChange={handleChange}
+                            className="w-full p-2 rounded bg-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500"
+                            required
+                        />
+                    </div>
+                    <div className="mb-4">
                         <label className="block text-white mb-2">Image</label>
                         <label htmlFor="img" className="cursor-pointer block w-full bg-gray-700 p-4 rounded-lg text-center text-gray-200 border border-gray-600 hover:bg-gray-600 hover:border-gray-400">
-                            {item.img ? (
-                                <img src={item.img} alt="Selected" className="w-full h-auto mb-2 mx-auto" />
+                            {item.imgName ? (
+                                <span>{item.imgName}</span> // Display the image name
                             ) : (
                                 <span>Choose Image</span>
                             )}
@@ -156,10 +171,10 @@ const AddItemForm = () => {
                     </div>
                     <button type="submit" className="w-full p-2 rounded bg-green-500 text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500">Add Item</button>
                     <div className='mt-8 text-center'>
-                    <Link to="/home" className='text-green-500 hover:underline'>
-                        Continue Shopping
-                    </Link>
-                </div>
+                        <Link to="/home" className='text-green-500 hover:underline'>
+                            Continue Shopping
+                        </Link>
+                    </div>
                 </form>
             </div>
         </div>

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
-import { CiSearch, CiShoppingCart, CiDeliveryTruck} from 'react-icons/ci';
+import { CiSearch, CiShoppingCart, CiDeliveryTruck } from 'react-icons/ci';
 import { IoHeart, IoHeartOutline } from 'react-icons/io5';
 import { NavLink, Link } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
@@ -23,7 +23,7 @@ const Main = () => {
     const [filteredProducts, setFilteredProducts] = useState(Products);
     const [loading, setLoading] = useState(true);
     const { favoriteItems, addToFavorites, removeFromFavorites } = useContext(CartContext);
-    const featuredProductsRef = useRef(null); // Ref for featured products section
+    const featuredProductsRef = useRef(null);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -54,7 +54,6 @@ const Main = () => {
         };
         setFilteredProducts(filteredArray);
 
-        // Scroll to featured products section
         if (featuredProductsRef.current) {
             featuredProductsRef.current.scrollIntoView({ behavior: 'smooth' });
         }
@@ -64,7 +63,7 @@ const Main = () => {
         <div className='w-full relative bg-gray-900 text-gray-200'>
             <div className='sticky top-0 z-10'>
                 <div className='header flex flex-col sm:flex-row justify-between items-center p-4 bg-gray-800 shadow-md'>
-                    <div className="flex items-center space-x-4 mb-4 sm:mb-0"> {/* Adjusted alignment and spacing */}
+                    <div className="flex items-center space-x-4 mb-4 sm:mb-0">
                         <h1 className='text-3xl font-bold text-green-400'>VeggieLink</h1>
                         <div className="flex items-center space-x-4">
                             <NavLink
@@ -89,16 +88,16 @@ const Main = () => {
                                 <span className="text-white">Orders</span>
                             </NavLink>
                             <NavLink
-                            to='/additemform'
-                            className="flex items-center justify-center bg-gray-700 text-white px-5 py-2 rounded-full hover:bg-gray-500 transition duration-300 ease-in-out transform hover:scale-105"
-                        >
-                            <FiPlusCircle className="mr-2" size={'1.5rem'} />
-                            <span className="text-white">Post</span>
-                        </NavLink>
+                                to='/additemform'
+                                className="flex items-center justify-center bg-gray-700 text-white px-5 py-2 rounded-full hover:bg-gray-500 transition duration-300 ease-in-out transform hover:scale-105"
+                            >
+                                <FiPlusCircle className="mr-2" size={'1.5rem'} />
+                                <span className="text-white">Post</span>
+                            </NavLink>
                         </div>
                     </div>
 
-                    <div className="flex items-center space-x-4"> {/* Adjusted alignment and spacing */}
+                    <div className="flex items-center space-x-4">
                         <div className="search flex items-center bg-gray-700 rounded-full">
                             <input
                                 type="text"
@@ -126,8 +125,8 @@ const Main = () => {
                     showThumbs={false} 
                     showStatus={false} 
                     className='carousel-wrapper'
-                    interval={2000} // Set interval to 5 seconds
-                    stopOnHover={true} // Pause on hover
+                    interval={2000} 
+                    stopOnHover={true}
                 >
                     <div className="carousel-item">
                         <img src={quote1} alt="Customer Quote 1" style={{ maxHeight: '90vh', opacity: 0.4 }} />
@@ -165,6 +164,7 @@ const Main = () => {
                                     <div className="flex flex-col justify-between flex-grow mt-4">
                                         <h1 className="text-lg font-semibold text-green-400">{item.title}</h1>
                                         <p className="text-sm text-gray-200">{item.description}</p>
+                                        <p className="text-sm text-gray-400">Quantity: {item.quantity}</p>
                                         <div className="flex justify-between items-center mt-4">
                                             <p className="text-xl font-bold text-gray-200">Rs. {item.price}.00</p>
                                             <button

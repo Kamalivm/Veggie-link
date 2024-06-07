@@ -78,6 +78,7 @@ const ProductDetails = () => {
                         <img src={product.img} alt={product.title} className='w-full h-72 object-cover rounded mb-5' />
                         <h1 className='text-3xl font-bold text-green-400'>{product.title}</h1>
                         <p className='text-md text-gray-300'>{product.description}</p>
+                        <p className='text-md text-gray-300'>Quantity : {product.quantity}</p>
                         <div className="flex items-center mt-3">
                             <RatingStars rating={product.rating} />
                         </div>

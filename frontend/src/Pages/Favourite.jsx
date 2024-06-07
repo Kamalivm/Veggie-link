@@ -28,7 +28,7 @@ const Favorite = () => {
                 </div>
             </header>
             <div className="flex-grow p-8">
-                <h1 className="text-3xl font-bold text-green-400 mb-4">Favourite Items</h1>
+                <h1 className="text-3xl font-bold text-white mb-4">Favourite Items</h1>
                 {favoriteItems.length === 0 ? (
                     <p>No favourite items.</p>
                 ) : (
@@ -40,6 +40,7 @@ const Favorite = () => {
                                     <div className="flex flex-col justify-between flex-grow mt-4">
                                         <h1 className="text-lg font-semibold text-green-400">{item.title}</h1>
                                         <p className="text-sm text-gray-300">{item.description}</p>
+                                        <p className="text-sm text-gray-300">Quantity : {item.quantity}</p>
                                         <div className="flex justify-between items-center mt-4">
                                             <p className="text-xl font-bold text-white">Rs. {item.price}.00</p>
                                             <button
