@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Signup = () => {
     const [formData, setFormData] = useState({
@@ -107,6 +107,13 @@ const Signup = () => {
                 <button type='submit' className='w-full py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300'>
                     Signup Now
                 </button>
+                {/* "Already have an account?" link */}
+                <p className="mt-4 text-center text-gray-400">
+                    Already have an account?{' '}
+                    <Link to="/login" className="text-green-400 hover:underline">
+                        Login here
+                    </Link>
+                </p>
             </form>
         </div>
     );

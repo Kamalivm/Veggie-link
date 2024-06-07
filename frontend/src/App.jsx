@@ -6,7 +6,7 @@ import Payment from './Pages/PaymentPage'
 import ProductDetails from './Pages/ProductDetails'
 import Signup from './Pages/Signup'
 import AddItemForm from './Pages/AddItemForm'
-
+import Login from './Pages/Login'
 
 import{
   createBrowserRouter,
@@ -20,6 +20,7 @@ function App() {
     createRoutesFromElements(
       <Route path = '/' element = {<Root/>}>
         <Route index element = {<Signup/>}/>
+        <Route path='/login' element = {<Login/>}/>
         <Route path='/home' element = {<Home/>}/>
         <Route path='/cart' element = {<Cart/>}/>
         <Route path='/favs' element = {<Favourite/>}/>
