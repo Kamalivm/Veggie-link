@@ -7,6 +7,7 @@ Add items to cart and proceed to checkout.
 Add items to favorites for quick access.  
 View order history.  
 Rate and review products.  
+
 **Technologies Used**  
 React: Frontend library for building user interfaces.  
 React Router: For routing within the application.  
@@ -17,14 +18,18 @@ Express: Web application framework for Node.js for building the server-side logi
 MongoDB: NoSQL database for storing product details, user data, and orders.  
 jsonwebtoken: For user authentication and authorization.  
 bcrypt: For hashing user passwords.  
+
 **Getting Started**  
 Prerequisites  
 Node.js installed on your machine  
 MongoDB Atlas account (or local MongoDB server)  
+
 **Installation**  
+
 Clone the repository:   
 
 git clone https://github.com/yourusername/VeggieLink.git  
+
 Navigate to the project directory:  
 
 cd VeggieLink  
