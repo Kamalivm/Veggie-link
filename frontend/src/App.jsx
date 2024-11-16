@@ -1,3 +1,4 @@
+import React from 'react'
 import {Home} from './Pages/Home'
 import Cart from './Pages/Cart'
 import Favourite from './Pages/Favourite'

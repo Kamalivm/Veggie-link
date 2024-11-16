@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { NavLink, Link } from 'react-router-dom'; // Import NavLink
+import { NavLink, Link } from 'react-router-dom'; 
 import { CartContext } from '../Components/CartContext.jsx';
 import { CiShoppingCart, CiDeliveryTruck } from 'react-icons/ci';
 import { IoHeart } from 'react-icons/io5';
@@ -12,14 +12,14 @@ const AddItemForm = () => {
         description: '',
         price: '',
         img: '',
-        imgName: '', // Add imgName to state
-        category: 'fruitItems', // default category
-        quantity: '' // Add quantity to state
+        imgName: '',
+        category: 'fruitItems',
+        quantity: ''
     });
 
     const handleChange = (e) => {
         const { name, value, type } = e.target;
-        // If input type is file, handle image upload
+        
         if (type === 'file') {
             handleImageUpload(e);
         } else {
@@ -34,8 +34,8 @@ const AddItemForm = () => {
         const file = e.target.files[0];
         setItem((prevItem) => ({
             ...prevItem,
-            img: URL.createObjectURL(file), // Set the image URL for display if needed
-            imgName: file.name // Set the image file name
+            img: URL.createObjectURL(file),
+            imgName: file.name 
         }));
     };
 
@@ -52,7 +52,7 @@ const AddItemForm = () => {
             price: parseFloat(item.price),
             img: item.img,
             imgName: item.imgName,
-            quantity: parseInt(item.quantity) // Add quantity to new item
+            quantity: parseInt(item.quantity) 
         };
         addItem(newItem, item.category);
         setItem({

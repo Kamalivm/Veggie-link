@@ -1,38 +1,44 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import SignupImage from '../assets/SignupImage.webp';
 
 const Login = () => {
     const [formData, setFormData] = useState({
         name: '',
-        phoneNumber: ''
+        phoneNumber: '',
     });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
             ...formData,
-            [name]: value
+            [name]: value,
         });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Here you can add your login logic, like sending the data to a server for authentication
-        
-        // For now, let's just log the form data
         console.log(formData);
-        
-        // Navigate to the home page after login (Replace '/home' with your home page route)
-        // You can use useHistory or pass a state to manage login status if needed
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-            <div className="max-w-md w-full p-8 bg-gray-800 rounded-lg shadow-lg">
-                <h2 className="text-3xl font-bold mb-6 text-center">Login</h2>
+        <div
+            className="min-h-screen flex items-center justify-center bg-cover bg-center text-white"
+            style={{
+                backgroundImage: `url(${SignupImage})`,
+            }}
+        >
+            {/* Overlay for better readability */}
+            <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+
+            {/* Login Form */}
+            <div className="relative z-10 bg-gray-800 bg-opacity-45 p-8 rounded-lg shadow-lg w-full max-w-md">
+                <h2 className="text-3xl font-bold text-green-400 mb-6 text-center">Login</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
-                        <label htmlFor="name" className="block mb-2">Name</label>
+                        <label htmlFor="name" className="block mb-2 text-sm font-medium">
+                            Name
+                        </label>
                         <input
                             type="text"
                             id="name"
@@ -45,7 +51,9 @@ const Login = () => {
                         />
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="phoneNumber" className="block mb-2">Phone Number</label>
+                        <label htmlFor="phoneNumber" className="block mb-2 text-sm font-medium">
+                            Phone Number
+                        </label>
                         <input
                             type="tel"
                             id="phoneNumber"
@@ -57,16 +65,13 @@ const Login = () => {
                             required
                         />
                     </div>
-                    <Link to="/home">
-                        <button
-                            type="submit"
-                            className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-                        >
-                            Login
-                        </button>
-                    </Link>
+                    <button
+                        type="submit"
+                        className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <Link to="/home">Login</Link>
+                    </button>
                 </form>
-                {/* "Don't have an account?" link */}
+
                 <p className="mt-4 text-center text-gray-400">
                     Don't have an account?{' '}
                     <Link to="/" className="text-green-400 hover:underline">
