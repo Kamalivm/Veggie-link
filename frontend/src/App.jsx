@@ -8,6 +8,7 @@ import ProductDetails from './Pages/ProductDetails'
 import Signup from './Pages/Signup'
 import AddItemForm from './Pages/AddItemForm'
 import Login from './Pages/Login'
+import Settings from './Components/Settings'
 
 import{
   createBrowserRouter,
@@ -16,6 +17,7 @@ import{
   Outlet,
   Route
 }from 'react-router-dom'
+
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -29,6 +31,7 @@ function App() {
         <Route path='/payment' element = {<Payment/>}/>
         <Route path='/details/:id' element={<ProductDetails/>}/>
         <Route path='/additemform' element = {<AddItemForm/>}/>
+        <Route path="/settings" element={<Settings/>} />
       </Route>
     )
   )

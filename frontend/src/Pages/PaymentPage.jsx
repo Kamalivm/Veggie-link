@@ -25,7 +25,7 @@ const PaymentPage = () => {
             <div className="bg-gray-800 p-10 rounded-lg shadow-2xl w-full max-w-4xl flex flex-col lg:flex-row gap-8">
                 {/* Left Side - Cart Items */}
                 <div className="w-full lg:w-1/3 mb-8 lg:mb-0">
-                    <h2 className="text-3xl font-semibold mb-4 text-gray-300">Your Cart</h2>
+                    <h2 className="text-3xl font-bold mb-4 text-gray-300">Your Cart</h2>
                     {cartItems && cartItems.length > 0 ? (
                         <ul>
                             {cartItems.map(item => (

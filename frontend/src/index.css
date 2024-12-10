@@ -22,13 +22,11 @@
     color: red;
     font-size: 12px;
     margin: 0 0 0.75px 0;
-  }
-
-  /* Favorites */
-
+}
+/* Favorites */
 .favorite-items-container {
-    min-height: 100vh; 
-    background-color: #080816 ; 
-    padding: 2rem; 
-    box-sizing: border-box; 
-  }
+    min-height: 100vh;
+    background-color: #080816 ;
+    padding: 2rem;
+    box-sizing: border-box;
+}

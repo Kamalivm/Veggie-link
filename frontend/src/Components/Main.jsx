@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import { CiSearch, CiShoppingCart, CiDeliveryTruck } from 'react-icons/ci';
 import { IoHeart, IoHeartOutline } from 'react-icons/io5';
 import { NavLink, Link } from 'react-router-dom';
@@ -10,7 +10,9 @@ import quote1 from '../assets/quote1.jpg';
 import quote2 from '../assets/quote2.jpg';
 import quote3 from '../assets/quote3.avif';
 import { FaUser } from 'react-icons/fa';
-import { FiPlusCircle } from 'react-icons/fi';
+// import { FaUserCircle } from 'react-icons/fa';
+import { FiSettings, FiLogOut } from 'react-icons/fi';
+// import { FiPlusCircle } from 'react-icons/fi';
 
 const Main = () => {
     const Products = {
@@ -19,19 +21,24 @@ const Main = () => {
         spinachItems: Data.spinachItems,
         seedItems: Data.seedItems,
     };
+    const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const [filteredProducts, setFilteredProducts] = useState(Products);
-    const [loading, setLoading] = useState(true);
-    const [noResults, setNoResults] = useState(false); // State to handle no results message
+    // const [loading, setLoading] = useState(true);
+    const [noResults, setNoResults] = useState(false);
     const { favoriteItems, addToFavorites, removeFromFavorites } = useContext(CartContext);
     const featuredProductsRef = useRef(null);
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 2000);
-        return () => clearTimeout(timer);
-    }, []);
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         setLoading(false);
+    //     }, 2000);
+    //     return () => clearTimeout(timer);
+    // }, []);
+
+    const toggleDropdown = () => {
+        setDropdownOpen(!dropdownOpen);
+    };
 
     const isFavorite = (item) => {
         return favoriteItems && favoriteItems.some((favItem) => favItem.id === item.id);
@@ -55,7 +62,6 @@ const Main = () => {
         };
         setFilteredProducts(filteredArray);
 
-        // Check if any products were found
         const noResultsFound = !Object.values(filteredArray).some((category) => category.length > 0);
         setNoResults(noResultsFound);
 
@@ -73,31 +79,24 @@ const Main = () => {
                         <div className="flex items-center space-x-4">
                             <NavLink
                                 to='/cart'
-                                className="flex items-center justify-center bg-gray-700 text-white px-5 py-2 rounded-full hover:bg-gray-500 transition duration-300 ease-in-out transform hover:scale-105">
+                                className="flex items-center justify-center bg-gray-700 text-white px-5 py-2 rounded-full hover:bg-green-500 transition duration-300 ease-in-out transform hover:scale-105">
                                 <CiShoppingCart className="mr-2" size={'1.5rem'} />
                                 <span className="text-white">Cart</span>
                             </NavLink>
                             <NavLink
                                 to='/favs'
-                                className="flex items-center justify-center bg-gray-700 text-white px-5 py-2 rounded-full hover:bg-gray-500 transition duration-300 ease-in-out transform hover:scale-105">
+                                className="flex items-center justify-center bg-gray-700 text-white px-5 py-2 rounded-full hover:bg-green-500 transition duration-300 ease-in-out transform hover:scale-105">
                                 <IoHeart className="mr-2 text-red-400" size={'1.5rem'} />
                                 <span className="text-white">Favorites</span>
                             </NavLink>
                             <NavLink
                                 to='/orders'
-                                className="flex items-center justify-center bg-gray-700 text-white px-5 py-2 rounded-full hover:bg-gray-500 transition duration-300 ease-in-out transform hover:scale-105">
+                                className="flex items-center justify-center bg-gray-700 text-white px-5 py-2 rounded-full hover:bg-green-500 transition duration-300 ease-in-out transform hover:scale-105">
                                 <CiDeliveryTruck className="mr-2" size={'1.5rem'} />
                                 <span className="text-white">Orders</span>
                             </NavLink>
-                            {/* <NavLink
-                                to='/additemform'
-                                className="flex items-center justify-center bg-gray-700 text-white px-5 py-2 rounded-full hover:bg-gray-500 transition duration-300 ease-in-out transform hover:scale-105">
-                                <FiPlusCircle className="mr-2" size={'1.5rem'} />
-                                <span className="text-white">Post</span>
-                            </NavLink> */}
                         </div>
                     </div>
-
                     <div className="flex items-center space-x-4">
                         <div className="search flex items-center bg-gray-700 rounded-full">
                             <input
@@ -110,24 +109,51 @@ const Main = () => {
                                 <CiSearch size="1.5em" />
                             </button>
                         </div>
-                        <NavLink
-                            to='/'
-                            className="flex items-center justify-center bg-gray-700 text-center text-white px-3 py-3 rounded-full hover:bg-gray-500 transition duration-300 ease-in-out transform hover:scale-105">
-                            <FaUser size="1.2em" />
-                        </NavLink>
+                        <div className="relative">
+                            {/* User Icon */}
+                            <button
+                                onClick={toggleDropdown}
+                                className="flex items-center justify-center bg-gray-700 text-center text-white px-3 py-3 rounded-full hover:bg-green-500 transition duration-300 ease-in-out transform hover:scale-105">
+                                <FaUser size="1.2em" />
+                            </button>
+
+                            {/* Dropdown Menu */}
+                            {dropdownOpen && (
+                                <div className="absolute right-0 mt-2 w-48 bg-gray-800 text-gray-200 rounded-lg shadow-lg">
+                                    {/* <NavLink
+                                        to="/account"
+                                        className="flex items-center px-4 py-2 hover:bg-gray-700 rounded-t-lg transition">
+                                    <FaUserCircle className="mr-2" size="1.2em" />
+                                        Account
+                                    </NavLink> */}
+                                    <NavLink
+                                        to="/settings"
+                                        className="flex items-center px-4 py-2 hover:bg-gray-700 transition">
+                                    <FiSettings className="mr-2" size="1.2em" />
+                                        Settings
+                                    </NavLink>
+                                    <NavLink
+                                        to="/login"
+                                        className="flex items-center px-4 py-2 hover:bg-gray-700 rounded-b-lg transition">
+                                    <FiLogOut className="mr-2" size="1.2em" />
+                                        Logout
+                                    </NavLink>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
             
             <div className='carousel-section bg-gray-800 h-screen relative'>
-                <Carousel 
-                    showArrows={false} 
-                    autoPlay={true} 
-                    infiniteLoop={true} 
-                    showThumbs={false} 
-                    showStatus={false} 
+                <Carousel
+                    showArrows={false}
+                    autoPlay={true}
+                    infiniteLoop={true}
+                    showThumbs={false}
+                    showStatus={false}
                     className='carousel-wrapper'
-                    interval={2000} 
+                    interval={2000}
                     stopOnHover={true}>
                     <div className="carousel-item">
                         <img src={quote1} alt="Customer Quote 1" style={{ maxHeight: '90vh', opacity: 0.4 }} />
@@ -145,12 +171,13 @@ const Main = () => {
             </div>
 
             {/* Featured Products Section */}
-            <div ref={featuredProductsRef} className='products-section bg-gray-800'>
+            <div ref={featuredProductsRef} className='products-section bg-gray-800 py-8'>
                 <h2 className='text-3xl font-bold text-center text-green-400 mb-8'>Featured Products</h2>
 
                 {noResults ? (
-                    <div className="text-center text-xl font-bold text-white bg-gray-800 p-6 ">
-                        No products found matching your search.
+                    <div className="text-center text-xl font-bold text-white bg-gray-800 p-6">
+                        Product not found.<br/>
+                        Search for another product..
                     </div>
                 ) : (
                     <div className="products grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-4">
@@ -160,12 +187,12 @@ const Main = () => {
                                     <Link
                                         to={`/details/${item.id}`}
                                         key={item.id}
-                                        className="product flex flex-col justify-between bg-gray-700 p-4 rounded-lg shadow-md transition duration-300 transform hover:shadow-xl hover:scale-105 cursor-pointer">
+                                        className="product flex flex-col justify-between bg-gray-700 p-4 rounded-lg shadow-md hover:shadow-xl transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer">
                                         <img src={item.img} alt={item.title} className="w-full h-48 object-cover rounded" />
                                         <div className="flex flex-col justify-between flex-grow mt-4">
                                             <h1 className="text-lg font-semibold text-green-400">{item.title}</h1>
                                             <p className="text-sm text-gray-200">{item.description}</p>
-                                            <p className="text-sm text-gray-400">Quantity: {item.quantity}</p>
+                                            <p className="text-sm text-gray-400">Weight: {item.weight}</p>
                                             <div className="flex justify-between items-center mt-4">
                                                 <p className="text-xl font-bold text-gray-200">Rs. {item.price}.00</p>
                                                 <button
